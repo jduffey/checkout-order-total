@@ -16,6 +16,10 @@ public class ProductsTest {
         Assert.assertEquals(0, session.getPreTaxTotal());
         session.scanItem("soup");
         Assert.assertEquals(189, session.getPreTaxTotal());
+        session.scanItem("snickers");
+        Assert.assertEquals(189 + 79, session.getPreTaxTotal());
+        session.scanItem("six_pack_beer");
+        Assert.assertEquals(189 + 79 + 599, session.getPreTaxTotal());
     }
 
 }
