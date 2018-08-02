@@ -10,4 +10,12 @@ public class ProductsTest {
         Assert.assertEquals(599, Products.getPrice("six_pack_beer"));
     }
 
+    @Test
+    public void scanningAnItemShouldAddThatItemsPriceToCheckoutTotal() {
+        CheckoutSession session = new CheckoutSession();
+        Assert.assertEquals(0, session.getPreTaxTotal());
+        session.scanItem("soup");
+        Assert.assertEquals(189, session.getPreTaxTotal());
+    }
+
 }
