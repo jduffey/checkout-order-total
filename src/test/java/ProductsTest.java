@@ -22,4 +22,11 @@ public class ProductsTest {
         Assert.assertEquals(189 + 79 + 599, session.getPreTaxTotal());
     }
 
+    @Test
+    public void perWeightItemsShouldHaveGettersForTheirPerPerPoundPrice() {
+        Assert.assertEquals(399, Products.getPrice("beef"));
+        Assert.assertEquals(159, Products.getPrice("bananas"));
+        Assert.assertEquals(799, Products.getPrice("ground_coffee"));
+    }
+
 }
