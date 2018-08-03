@@ -19,4 +19,16 @@ public class ProductsTest {
         Assert.assertEquals(738, session.getPreTaxTotal());
     }
 
+    @Test
+    public void thereShouldBeASetOfItemsThatArePricedPerUnit() {
+        CheckoutSession session = new CheckoutSession();
+        Item item1 = new Item("sledgehammer", 15);
+        Item item2 = new Item("chainsaw", 12);
+        Item item3 = new Item("bigbagofdogfood", 40);
+        session.scanItem(item1);
+        session.scanItem(item2);
+        session.scanItem(item3);
+        Assert.assertEquals(26998, session.getPreTaxTotal());
+    }
+
 }
