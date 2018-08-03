@@ -3,20 +3,27 @@ import java.util.Map;
 
 public class Products {
 
-    public static int getPrice(Item item) {
+    public static int calculatePrice(Item item) {
 
-        Map<String, Integer> priceList = new HashMap<>();
+        Map<String, Integer> perWeightPriceList = new HashMap<>();
 
-        priceList.put("soup", 189);
-        priceList.put("sledgehammer", 1599);
-        priceList.put("chainsaw", 21900);
-        priceList.put("bigbagofdogfood", 3499);
-        priceList.put("beef", 369);
-        priceList.put("coffeebeans", 799);
-        priceList.put("candycornbythebag", 499);
-        priceList.put("birdseed", 399);
+        perWeightPriceList.put("beef", 369);
+        perWeightPriceList.put("coffeebeans", 799);
+        perWeightPriceList.put("candycornbythebag", 499);
+        perWeightPriceList.put("birdseed", 399);
 
-        return priceList.get(item.getName());
+        Map<String, Integer> perUnitPriceList = new HashMap<>();
+
+        perUnitPriceList.put("soup", 189);
+        perUnitPriceList.put("sledgehammer", 1599);
+        perUnitPriceList.put("chainsaw", 21900);
+        perUnitPriceList.put("bigbagofdogfood", 3499);
+
+        if (perWeightPriceList.containsKey(item.getName())) {
+
+            return item.getWeight() * perWeightPriceList.get(item.getName());
+
+        } else return perUnitPriceList.get(item.getName());
     }
 
 }
