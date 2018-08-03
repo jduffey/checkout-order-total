@@ -5,9 +5,9 @@ public class ProductsTest {
 
     @Test
     public void scanningAPerUnitItemShouldAddItsPriceToTheTotal() {
-        Item soup = new Item("soup");
+        Item item = new Item("soup");
         CheckoutSession session = new CheckoutSession();
-        session.scanItem(soup);
+        session.scanItem(item);
         Assert.assertEquals(189, session.getPreTaxTotal());
     }
 
