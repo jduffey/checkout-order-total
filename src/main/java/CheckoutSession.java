@@ -15,7 +15,10 @@ public class CheckoutSession {
     }
 
     private void decideHowMuchToAddToTotal(Item lastScannedItem) {
-        if (lastScannedItem.getName().equalsIgnoreCase("beef")) {
+        if ((lastScannedItem.getName().equalsIgnoreCase("beef") ||
+                lastScannedItem.getName().equalsIgnoreCase("coffeebeans") ||
+                lastScannedItem.getName().equalsIgnoreCase("candycornbythebag") ||
+                lastScannedItem.getName().equalsIgnoreCase("birdseed"))) {
             preTaxTotal += weightOfTheScannedItem * Products.getPrice(lastScannedItem);
         } else {
             preTaxTotal += Products.getPrice(lastScannedItem);

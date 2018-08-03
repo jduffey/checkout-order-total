@@ -12,6 +12,9 @@ public class Products {
         priceList.put("chainsaw", 21900);
         priceList.put("bigbagofdogfood", 3499);
         priceList.put("beef", 369);
+        priceList.put("coffeebeans", 799);
+        priceList.put("candycornbythebag", 499);
+        priceList.put("birdseed", 399);
 
         return priceList.get(item.getName());
     }
