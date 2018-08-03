@@ -6,7 +6,7 @@ public class CheckoutSession {
         return preTaxTotal;
     }
 
-    public void scanItem(String item) {
+    public void scanItem(Item item) {
         preTaxTotal += Products.getPrice(item);
     }
 }
