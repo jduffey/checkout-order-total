@@ -69,4 +69,22 @@ public class ProductsTest {
         Assert.assertEquals(expectedResult, session.getListOfScannedItems());
     }
 
+    @Test
+    public void cashierShouldBeAbleToRemoveAScannedItemAfterItIsScanned() {
+        CheckoutSession session = new CheckoutSession();
+        Item item1 = new Item("coffeebeans", 2);
+        Item item2 = new Item("soup", 2);
+        session.scanItem(item1);
+        session.scanItem(item2);
+        Assert.assertEquals(2 * 799 + 189, session.getPreTaxTotal());
+
+        session.removeItem(item1);
+
+        ArrayList<Item> expectedResult = new ArrayList<Item>();
+        expectedResult.add(item2);
+
+        Assert.assertEquals(expectedResult, session.getListOfScannedItems());
+        Assert.assertEquals(189, session.getPreTaxTotal());
+    }
+
 }

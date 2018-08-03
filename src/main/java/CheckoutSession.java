@@ -31,4 +31,9 @@ public class CheckoutSession {
         return listOfScannedItems;
 
     }
+
+    public void removeItem(Item itemToRemove) {
+        listOfScannedItems.remove(itemToRemove);
+        preTaxTotal -= Products.calculatePrice(itemToRemove);
+    }
 }
