@@ -13,52 +13,64 @@ public class ProductsTest {
 
     @Test
     public void scanningAPerUnitItemShouldAddItsPriceToTheTotal() {
-        Item item = new Item("soup", 2);
         CheckoutSession session = new CheckoutSession();
+
+        Item item = new Item("soup", 2);
         session.scanItem(item);
+
         Assert.assertEquals(189, session.getPreTaxTotal());
     }
 
     @Test
     public void scanningAPerWeightItemShouldAddTheAppropriatePriceToTheTotal() {
         CheckoutSession session = new CheckoutSession();
+
         Item item = new Item("beef", 2);
         session.scanItem(item);
+
         Assert.assertEquals(738, session.getPreTaxTotal());
     }
 
     @Test
-    public void thereShouldBeASetOfItemsThatArePricedPerUnit() {
+    public void thereShouldBeASetOfItemsThatArePricedPerUnitThatAreAllScannable() {
         CheckoutSession session = new CheckoutSession();
+
         Item item1 = new Item("sledgehammer", 15);
         Item item2 = new Item("chainsaw", 12);
         Item item3 = new Item("bigbagofdogfood", 40);
+
         session.scanItem(item1);
         session.scanItem(item2);
         session.scanItem(item3);
+
         Assert.assertEquals(26998, session.getPreTaxTotal());
     }
 
     @Test
-    public void thereShouldBeASetOfItemsThatArePricedPerWeight() {
+    public void thereShouldBeASetOfItemsThatArePricedPerWeightThatAreAllScannable() {
         CheckoutSession session = new CheckoutSession();
+
         Item item1 = new Item("coffeebeans", 2);
         Item item2 = new Item("candycornbythebag", 2);
         Item item3 = new Item("birdseed", 2);
+
         session.scanItem(item1);
         session.scanItem(item2);
         session.scanItem(item3);
+
         Assert.assertEquals(3394, session.getPreTaxTotal());
     }
 
     @Test
     public void sessionShouldKeepAListOfAllItemsItHasScanned() {
         CheckoutSession session = new CheckoutSession();
+
         Item item1 = new Item("coffeebeans", 2);
         Item item2 = new Item("candycornbythebag", 2);
         Item item3 = new Item("coffeebeans", 2);
         Item item4 = new Item("birdseed", 2);
         Item item5 = new Item("soup", 2);
+
         session.scanItem(item1);
         session.scanItem(item2);
         session.scanItem(item3);
@@ -78,11 +90,12 @@ public class ProductsTest {
     @Test
     public void cashierShouldBeAbleToRemoveAScannedItemFromTheListOfScannedItems() {
         CheckoutSession session = new CheckoutSession();
+
         Item item1 = new Item("coffeebeans", 2);
         Item item2 = new Item("soup", 2);
+
         session.scanItem(item1);
         session.scanItem(item2);
-        Assert.assertEquals(2 * 799 + 189, session.getPreTaxTotal());
 
         session.removeItem(item1);
 
@@ -95,10 +108,13 @@ public class ProductsTest {
     @Test
     public void removingAnItemShouldReduceThePreTaxTotal() {
         CheckoutSession session = new CheckoutSession();
+
         Item item1 = new Item("coffeebeans", 2);
         Item item2 = new Item("soup", 2);
+
         session.scanItem(item1);
         session.scanItem(item2);
+
         Assert.assertEquals(2 * 799 + 189, session.getPreTaxTotal());
 
         session.removeItem(item1);
@@ -109,11 +125,11 @@ public class ProductsTest {
     @Test
     public void sessionShouldBeAbleToImplementAMarkdownDiscountOnAPerUnitItem() {
         CheckoutSession session = new CheckoutSession();
-        Item item1 = new Item("soup", 2);
-        session.scanItem(item1);
-        Assert.assertEquals(189, session.getPreTaxTotal());
-
         Discounts.enableMarkdown("soup", 89);
+
+        Item item1 = new Item("soup", 2);
+
+        session.scanItem(item1);
 
         Assert.assertEquals(100, session.getPreTaxTotal());
     }
@@ -121,11 +137,11 @@ public class ProductsTest {
     @Test
     public void sessionShouldBeAbleToImplementAMarkdownDiscountOnADifferentPerUnitItem() {
         CheckoutSession session = new CheckoutSession();
-        Item item1 = new Item("bigbagofdogfood", 40);
-        session.scanItem(item1);
-        Assert.assertEquals(3499, session.getPreTaxTotal());
-
         Discounts.enableMarkdown("bigbagofdogfood", 500);
+
+        Item item1 = new Item("bigbagofdogfood", 40);
+
+        session.scanItem(item1);
 
         Assert.assertEquals(2999, session.getPreTaxTotal());
     }
@@ -133,11 +149,11 @@ public class ProductsTest {
     @Test
     public void aScannedAndDiscountedItemWhenRemovedShouldUpdatePriceProperly() {
         CheckoutSession session = new CheckoutSession();
-        Item item1 = new Item("soup", 2);
-        session.scanItem(item1);
-        Assert.assertEquals(189, session.getPreTaxTotal());
-
         Discounts.enableMarkdown("soup", 89);
+
+        Item item1 = new Item("soup", 2);
+
+        session.scanItem(item1);
 
         Assert.assertEquals(100, session.getPreTaxTotal());
 
@@ -150,13 +166,13 @@ public class ProductsTest {
     @Test
     public void aScannedAndDiscountedItemWhenRemovedShouldUpdatePriceProperlyX() {
         CheckoutSession session = new CheckoutSession();
+        Discounts.enableMarkdown("soup", 89);
+
         Item item1 = new Item("soup", 2);
         Item item2 = new Item("soup", 2);
+
         session.scanItem(item1);
         session.scanItem(item2);
-        Assert.assertEquals(189 * 2, session.getPreTaxTotal());
-
-        Discounts.enableMarkdown("soup", 89);
 
         Assert.assertEquals(200, session.getPreTaxTotal());
 
