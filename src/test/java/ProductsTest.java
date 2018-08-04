@@ -87,7 +87,7 @@ public class ProductsTest {
     }
 
     @Test
-    public void removingAnItemShouldReduceThePreTaxTotal(){
+    public void removingAnItemShouldReduceThePreTaxTotal() {
         CheckoutSession session = new CheckoutSession();
         Item item1 = new Item("coffeebeans", 2);
         Item item2 = new Item("soup", 2);
@@ -98,6 +98,18 @@ public class ProductsTest {
         session.removeItem(item1);
 
         Assert.assertEquals(189, session.getPreTaxTotal());
+    }
+
+    @Test
+    public void sessionShouldBeAbleToImplementAMarkdownDiscountOnAPerUnitItem() {
+        CheckoutSession session = new CheckoutSession();
+        Item item1 = new Item("soup", 2);
+        session.scanItem(item1);
+        Assert.assertEquals(189, session.getPreTaxTotal());
+
+        Discounts.enableMarkdown("soup", 89);
+
+        Assert.assertEquals(100, session.getPreTaxTotal());
     }
 
 }
