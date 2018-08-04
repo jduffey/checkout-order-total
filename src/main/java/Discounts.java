@@ -11,15 +11,10 @@ public class Discounts {
         buyOneGetOnesInEffect.clear();
     }
 
-    public static void enableMarkdown(String itemName, int amountToMarkdownPerUnit) {
-
-        markdownsInEffect.put(itemName, amountToMarkdownPerUnit);
-    }
-
     public static int applyDiscounts(int preTaxTotal, ArrayList<Item> listOfScannedItems) {
 
         int discountedPreTaxTotal = preTaxTotal;
-        int itemCount = 0;
+        int counter = 0;
 
         for (Item item : listOfScannedItems) {
 
@@ -32,19 +27,22 @@ public class Discounts {
 
             if (buyOneGetOnesInEffect.contains(item.getName())) {
 
-                itemCount++;
+                counter++;
 
-                if (itemCount == 2) {
+                if (counter == 2) {
 
                     discountedPreTaxTotal = discountedPreTaxTotal - Products.calculatePrice(item);
-                    itemCount = 0;
+                    counter = 0;
                 }
-
             }
-
         }
 
         return discountedPreTaxTotal;
+    }
+
+    public static void enableMarkdown(String itemName, int amountToMarkdownPerUnit) {
+
+        markdownsInEffect.put(itemName, amountToMarkdownPerUnit);
     }
 
     public static void enableBuyOneGetOne(String itemName) {

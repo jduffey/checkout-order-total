@@ -210,4 +210,25 @@ public class ProductsTest {
         Assert.assertEquals(189 * 2 + 189, session.getPreTaxTotal());
     }
 
+    @Test
+    public void canApplyBuyOneGetOneToArbitraryAmountOfSameScannedItemsWithADifferentItemInTheShoppingCartVALIDATION() {
+        Discounts.enableBuyOneGetOne("soup");
+
+        Item item1 = new Item("soup", 2);
+        Item item2 = new Item("soup", 2);
+        Item item3 = new Item("soup", 2);
+        Item item4 = new Item("soup", 2);
+        Item item5 = new Item("soup", 2);
+        Item item6 = new Item("beef", 1);
+
+        session.scanItem(item1);
+        session.scanItem(item2);
+        session.scanItem(item3);
+        session.scanItem(item4);
+        session.scanItem(item5);
+        session.scanItem(item6);
+
+        Assert.assertEquals(189 * 2 + 189 + 369, session.getPreTaxTotal());
+    }
+
 }
