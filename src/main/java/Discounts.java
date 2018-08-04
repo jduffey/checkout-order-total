@@ -30,9 +30,9 @@ public class Discounts {
 
         for (Item item : listOfScannedItems) {
 
-            if (buyOneGetOnesInEffect.contains("soup")) {
+            if (buyOneGetOnesInEffect.contains(item.getName())) {
 
-                if (item.getName().equalsIgnoreCase("soup")) {
+                if (item.getName().equalsIgnoreCase(item.getName())) {
 
                     itemCount++;
 
