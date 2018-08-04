@@ -48,7 +48,7 @@ public class Discounts {
     }
 
     public static void enableBuyOneGetOne(String itemName) {
-        buyOneGetOnesInEffect.add("soup");
+        buyOneGetOnesInEffect.add(itemName);
     }
 }
 

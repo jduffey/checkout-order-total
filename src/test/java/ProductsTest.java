@@ -178,4 +178,17 @@ public class ProductsTest {
         Assert.assertEquals(189, session.getPreTaxTotal());
     }
 
+    @Test
+    public void shouldHaveABuyOneGetOneFreeDiscountAvailableForOtherItems() {
+        Discounts.enableBuyOneGetOne("chainsaw");
+
+        Item item1 = new Item("chainsaw", 2);
+        Item item2 = new Item("chainsaw", 2);
+
+        session.scanItem(item1);
+        session.scanItem(item2);
+
+        Assert.assertEquals(21900, session.getPreTaxTotal());
+    }
+
 }
