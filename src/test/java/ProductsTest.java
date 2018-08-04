@@ -162,9 +162,8 @@ public class ProductsTest {
         Assert.assertEquals(0, session.getPreTaxTotal());
     }
 
-    // Validation test that removing only one of the same item will update price correctly
     @Test
-    public void aScannedAndDiscountedItemWhenRemovedShouldUpdatePriceProperlyX() {
+    public void removingOnlyOneOfTheSameDiscountedItemWillUpdatePriceProperlyVALIDATION() {
         CheckoutSession session = new CheckoutSession();
         Discounts.enableMarkdown("soup", 89);
 
