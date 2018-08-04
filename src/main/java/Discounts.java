@@ -32,16 +32,14 @@ public class Discounts {
 
             if (buyOneGetOnesInEffect.contains(item.getName())) {
 
-                if (item.getName().equalsIgnoreCase(item.getName())) {
+                itemCount++;
 
-                    itemCount++;
+                if (itemCount == 2) {
 
-                    if (itemCount == 2) {
-
-                        discountedPreTaxTotal = discountedPreTaxTotal - Products.calculatePrice(item);
-                        itemCount = 0;
-                    }
+                    discountedPreTaxTotal = discountedPreTaxTotal - Products.calculatePrice(item);
+                    itemCount = 0;
                 }
+
             }
 
         }
