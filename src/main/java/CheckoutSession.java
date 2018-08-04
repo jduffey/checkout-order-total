@@ -6,34 +6,34 @@ public class CheckoutSession {
     private Item lastScannedItem;
     ArrayList<Item> listOfScannedItems = new ArrayList<Item>();
 
-    public int getPreTaxTotal() {
-        return preTaxTotal;
-    }
 
     public void scanItem(Item item) {
         this.lastScannedItem = item;
         addItemToListOfScannedItems(item);
-        decideHowMuchToAddToThePretaxTotal(lastScannedItem);
     }
 
     private void addItemToListOfScannedItems(Item item) {
-
         listOfScannedItems.add(item);
-
-    }
-
-    private void decideHowMuchToAddToThePretaxTotal(Item lastScannedItem) {
-        preTaxTotal += Products.calculatePrice(lastScannedItem);
-    }
-
-    public ArrayList<Item> getListOfScannedItems() {
-
-        return listOfScannedItems;
-
     }
 
     public void removeItem(Item itemToRemove) {
         listOfScannedItems.remove(itemToRemove);
         preTaxTotal -= Products.calculatePrice(itemToRemove);
+    }
+
+    private void calculateRawTotalOfAllScannedItems(ArrayList<Item> listOfScannedItems) {
+        preTaxTotal = 0;
+        for (Item item : listOfScannedItems) {
+            preTaxTotal += Products.calculatePrice(item);
+        }
+    }
+
+    public ArrayList<Item> getListOfScannedItems() {
+        return listOfScannedItems;
+    }
+
+    public int getPreTaxTotal() {
+        calculateRawTotalOfAllScannedItems(listOfScannedItems);
+        return preTaxTotal;
     }
 }
