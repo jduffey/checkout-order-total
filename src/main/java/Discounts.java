@@ -4,7 +4,7 @@ public class Discounts {
 
     private static final HashMap<String, Integer> markdownsInEffect = new HashMap<>();
 
-    public static void resetDiscounts(){
+    public static void resetDiscounts() {
         markdownsInEffect.clear();
     }
 
@@ -17,11 +17,8 @@ public class Discounts {
 
         int discountedPreTaxTotal = preTaxTotal;
 
-        if (markdownsInEffect.containsKey("soup")) {
-            discountedPreTaxTotal = discountedPreTaxTotal - markdownsInEffect.get("soup");
-        }
-        if(markdownsInEffect.containsKey("bigbagofdogfood")){
-            discountedPreTaxTotal = discountedPreTaxTotal - markdownsInEffect.get("bigbagofdogfood");
+        for (String productName : markdownsInEffect.keySet()) {
+            discountedPreTaxTotal = discountedPreTaxTotal - markdownsInEffect.get(productName);
         }
 
         return discountedPreTaxTotal;
