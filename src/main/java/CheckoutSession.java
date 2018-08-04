@@ -3,7 +3,6 @@ import java.util.ArrayList;
 public class CheckoutSession {
 
     private ArrayList<Item> listOfScannedItems = new ArrayList<>();
-    private Discounts discounts = new Discounts();
 
 
     public void scanItem(Item item) {
