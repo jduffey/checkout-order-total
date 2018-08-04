@@ -191,4 +191,23 @@ public class ProductsTest {
         Assert.assertEquals(21900, session.getPreTaxTotal());
     }
 
+    @Test
+    public void canApplyBuyOneGetOneToArbitraryAmountOfSameScannedItems() {
+        Discounts.enableBuyOneGetOne("soup");
+
+        Item item1 = new Item("soup", 2);
+        Item item2 = new Item("soup", 2);
+        Item item3 = new Item("soup", 2);
+        Item item4 = new Item("soup", 2);
+        Item item5 = new Item("soup", 2);
+
+        session.scanItem(item1);
+        session.scanItem(item2);
+        session.scanItem(item3);
+        session.scanItem(item4);
+        session.scanItem(item5);
+
+        Assert.assertEquals(189 * 2 + 189, session.getPreTaxTotal());
+    }
+
 }

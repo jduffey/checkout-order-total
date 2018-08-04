@@ -37,7 +37,9 @@ public class Discounts {
                     itemCount++;
 
                     if (itemCount == 2) {
+
                         discountedPreTaxTotal = discountedPreTaxTotal - Products.calculatePrice(item);
+                        itemCount = 0;
                     }
                 }
             }
