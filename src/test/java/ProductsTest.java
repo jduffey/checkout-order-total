@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class ProductsTest {
 
     @Before
-    public void setup(){
+    public void setup() {
         Discounts.resetDiscounts();
     }
 
@@ -131,7 +131,7 @@ public class ProductsTest {
     }
 
     @Test
-    public void aScannedAndDiscountedItemWhenRemovedShouldUpdatePriceProperly(){
+    public void aScannedAndDiscountedItemWhenRemovedShouldUpdatePriceProperly() {
         CheckoutSession session = new CheckoutSession();
         Item item1 = new Item("soup", 2);
         session.scanItem(item1);
@@ -144,6 +144,25 @@ public class ProductsTest {
         session.removeItem(item1);
 
         Assert.assertEquals(0, session.getPreTaxTotal());
+    }
+
+    // Validation test that removing only one of the same item will update price correctly
+    @Test
+    public void aScannedAndDiscountedItemWhenRemovedShouldUpdatePriceProperlyX() {
+        CheckoutSession session = new CheckoutSession();
+        Item item1 = new Item("soup", 2);
+        Item item2 = new Item("soup", 2);
+        session.scanItem(item1);
+        session.scanItem(item2);
+        Assert.assertEquals(189 * 2, session.getPreTaxTotal());
+
+        Discounts.enableMarkdown("soup", 89);
+
+        Assert.assertEquals(200, session.getPreTaxTotal());
+
+        session.removeItem(item1);
+
+        Assert.assertEquals(100, session.getPreTaxTotal());
     }
 
 }
