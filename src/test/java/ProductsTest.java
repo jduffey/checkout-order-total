@@ -6,15 +6,16 @@ import java.util.ArrayList;
 
 public class ProductsTest {
 
+    private CheckoutSession session;
+
     @Before
     public void setup() {
+        session = new CheckoutSession();
         Discounts.resetDiscounts();
     }
 
     @Test
     public void scanningAPerUnitItemShouldAddItsPriceToTheTotal() {
-        CheckoutSession session = new CheckoutSession();
-
         Item item = new Item("soup", 2);
         session.scanItem(item);
 
@@ -23,8 +24,6 @@ public class ProductsTest {
 
     @Test
     public void scanningAPerWeightItemShouldAddTheAppropriatePriceToTheTotal() {
-        CheckoutSession session = new CheckoutSession();
-
         Item item = new Item("beef", 2);
         session.scanItem(item);
 
@@ -33,8 +32,6 @@ public class ProductsTest {
 
     @Test
     public void thereShouldBeASetOfItemsThatArePricedPerUnitThatAreAllScannable() {
-        CheckoutSession session = new CheckoutSession();
-
         Item item1 = new Item("sledgehammer", 15);
         Item item2 = new Item("chainsaw", 12);
         Item item3 = new Item("bigbagofdogfood", 40);
@@ -48,8 +45,6 @@ public class ProductsTest {
 
     @Test
     public void thereShouldBeASetOfItemsThatArePricedPerWeightThatAreAllScannable() {
-        CheckoutSession session = new CheckoutSession();
-
         Item item1 = new Item("coffeebeans", 2);
         Item item2 = new Item("candycornbythebag", 2);
         Item item3 = new Item("birdseed", 2);
@@ -63,8 +58,6 @@ public class ProductsTest {
 
     @Test
     public void sessionShouldKeepAListOfAllItemsItHasScanned() {
-        CheckoutSession session = new CheckoutSession();
-
         Item item1 = new Item("coffeebeans", 2);
         Item item2 = new Item("candycornbythebag", 2);
         Item item3 = new Item("coffeebeans", 2);
@@ -89,8 +82,6 @@ public class ProductsTest {
 
     @Test
     public void cashierShouldBeAbleToRemoveAScannedItemFromTheListOfScannedItems() {
-        CheckoutSession session = new CheckoutSession();
-
         Item item1 = new Item("coffeebeans", 2);
         Item item2 = new Item("soup", 2);
 
@@ -107,8 +98,6 @@ public class ProductsTest {
 
     @Test
     public void removingAnItemShouldReduceThePreTaxTotal() {
-        CheckoutSession session = new CheckoutSession();
-
         Item item1 = new Item("coffeebeans", 2);
         Item item2 = new Item("soup", 2);
 
@@ -124,7 +113,6 @@ public class ProductsTest {
 
     @Test
     public void sessionShouldBeAbleToImplementAMarkdownDiscountOnAPerUnitItem() {
-        CheckoutSession session = new CheckoutSession();
         Discounts.enableMarkdown("soup", 89);
 
         Item item1 = new Item("soup", 2);
@@ -136,7 +124,6 @@ public class ProductsTest {
 
     @Test
     public void sessionShouldBeAbleToImplementAMarkdownDiscountOnADifferentPerUnitItem() {
-        CheckoutSession session = new CheckoutSession();
         Discounts.enableMarkdown("bigbagofdogfood", 500);
 
         Item item1 = new Item("bigbagofdogfood", 40);
@@ -148,7 +135,6 @@ public class ProductsTest {
 
     @Test
     public void aScannedAndDiscountedItemWhenRemovedShouldUpdatePriceProperly() {
-        CheckoutSession session = new CheckoutSession();
         Discounts.enableMarkdown("soup", 89);
 
         Item item1 = new Item("soup", 2);
@@ -164,7 +150,6 @@ public class ProductsTest {
 
     @Test
     public void removingOnlyOneOfTheSameDiscountedItemWillUpdatePriceProperlyVALIDATION() {
-        CheckoutSession session = new CheckoutSession();
         Discounts.enableMarkdown("soup", 89);
 
         Item item1 = new Item("soup", 2);
