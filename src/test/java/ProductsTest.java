@@ -1,9 +1,15 @@
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 
 public class ProductsTest {
+
+    @Before
+    public void setup(){
+        Discounts.resetDiscounts();
+    }
 
     @Test
     public void scanningAPerUnitItemShouldAddItsPriceToTheTotal() {
@@ -123,5 +129,7 @@ public class ProductsTest {
 
         Assert.assertEquals(2999, session.getPreTaxTotal());
     }
+
+    // Test for ensuring price is accurate after removing an item that had a discount
 
 }
