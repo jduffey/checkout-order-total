@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Discounts {
@@ -13,12 +14,15 @@ public class Discounts {
         markdownsInEffect.put(itemName, amountToMarkdownPerUnit);
     }
 
-    public static int applyDiscounts(int preTaxTotal) {
+    public static int applyDiscounts(int preTaxTotal, ArrayList<Item> listOfScannedItems) {
 
         int discountedPreTaxTotal = preTaxTotal;
 
-        for (String productName : markdownsInEffect.keySet()) {
-            discountedPreTaxTotal = discountedPreTaxTotal - markdownsInEffect.get(productName);
+        for (Item item : listOfScannedItems) {
+
+            if (markdownsInEffect.containsKey(item.getName())) {
+                discountedPreTaxTotal = discountedPreTaxTotal - markdownsInEffect.get(item.getName());
+            }
         }
 
         return discountedPreTaxTotal;

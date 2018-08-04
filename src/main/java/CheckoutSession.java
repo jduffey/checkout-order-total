@@ -29,7 +29,7 @@ public class CheckoutSession {
     public int getPreTaxTotal() {
         int preTaxTotal;
         preTaxTotal = calculateRawTotalOfAllScannedItems(listOfScannedItems);
-        preTaxTotal = Discounts.applyDiscounts(preTaxTotal);
+        preTaxTotal = Discounts.applyDiscounts(preTaxTotal, listOfScannedItems);
         return preTaxTotal;
     }
 }

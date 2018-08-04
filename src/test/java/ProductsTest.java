@@ -130,6 +130,20 @@ public class ProductsTest {
         Assert.assertEquals(2999, session.getPreTaxTotal());
     }
 
-    // Test for ensuring price is accurate after removing an item that had a discount
+    @Test
+    public void aScannedAndDiscountedItemWhenRemovedShouldUpdatePriceProperly(){
+        CheckoutSession session = new CheckoutSession();
+        Item item1 = new Item("soup", 2);
+        session.scanItem(item1);
+        Assert.assertEquals(189, session.getPreTaxTotal());
+
+        Discounts.enableMarkdown("soup", 89);
+
+        Assert.assertEquals(100, session.getPreTaxTotal());
+
+        session.removeItem(item1);
+
+        Assert.assertEquals(0, session.getPreTaxTotal());
+    }
 
 }
