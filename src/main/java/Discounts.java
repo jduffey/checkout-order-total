@@ -5,9 +5,9 @@ public class Discounts {
 
     private static final HashMap<String, Integer> markdownsInEffect = new HashMap<>();
 
-    public static void enableMarkdown(String soup, int i) {
+    public static void enableMarkdown(String itemName, int amountToMarkdownPerUnit) {
 
-        markdownsInEffect.put("soup", 89);
+        markdownsInEffect.put(itemName, amountToMarkdownPerUnit);
     }
 
     public static int applyDiscounts(int preTaxTotal) {
@@ -16,6 +16,9 @@ public class Discounts {
 
         if (markdownsInEffect.containsKey("soup")) {
             discountedPreTaxTotal = discountedPreTaxTotal - markdownsInEffect.get("soup");
+        }
+        if(markdownsInEffect.containsKey("bigbagofdogfood")){
+            discountedPreTaxTotal = discountedPreTaxTotal - markdownsInEffect.get("bigbagofdogfood");
         }
 
         return discountedPreTaxTotal;

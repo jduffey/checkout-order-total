@@ -112,4 +112,16 @@ public class ProductsTest {
         Assert.assertEquals(100, session.getPreTaxTotal());
     }
 
+    @Test
+    public void sessionShouldBeAbleToImplementAMarkdownDiscountOnADifferentPerUnitItem() {
+        CheckoutSession session = new CheckoutSession();
+        Item item1 = new Item("bigbagofdogfood", 40);
+        session.scanItem(item1);
+        Assert.assertEquals(3499, session.getPreTaxTotal());
+
+        Discounts.enableMarkdown("bigbagofdogfood", 500);
+
+        Assert.assertEquals(2999, session.getPreTaxTotal());
+    }
+
 }
